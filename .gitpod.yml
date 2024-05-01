@@ -4,11 +4,12 @@
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
-image: 
-  file: Dockerfile
+image:
+    file: .gitpod.Dockerfile
 
+ports:
+  - port: 3000
+    onOpen: open-preview
 tasks:
-  - init: echo start
-    command: ./bin/rails server
-
-
+  - init: bundle install && yarn install --check-files
+    command: rails server
