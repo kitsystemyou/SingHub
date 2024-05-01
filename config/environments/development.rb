@@ -73,4 +73,14 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.hosts << ENV["APP_DOMAIN"] unless ENV["APP_DOMAIN"].nil?
+  if ENV["GITPOD_WORKSPACE_URL"]
+    puts ENV["GITPOD_WORKSPACE_URL"]
+  end
+  if (gitpod_workspace_url = ENV["GITPOD_WORKSPACE_URL"])
+    config.hosts << "3000-" + URI.parse(gitpod_workspace_url).host
+  end
+  config.app_domain = "localhost:3000"
+
 end
